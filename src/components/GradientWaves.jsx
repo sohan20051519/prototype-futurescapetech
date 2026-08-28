@@ -9,9 +9,9 @@ const hexToRgb = hex => {
 };
 
 const detailToSteps = detail => {
-  if (detail === 'low') return 40.0;
-  if (detail === 'high') return 110.0;
-  return 70.0;
+  if (detail === 'low') return 24.0;
+  if (detail === 'high') return 48.0;
+  return 32.0;
 };
 
 const vertex = `#version 300 es
@@ -158,12 +158,13 @@ const GradientWaves = ({
     const container = containerRef.current;
     if (!container) return;
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
       premultipliedAlpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      dpr: isMobile ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.25)
     });
 
     const gl = renderer.gl;
@@ -172,6 +173,8 @@ const GradientWaves = ({
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.touchAction = 'pan-y';
     container.appendChild(canvas);
 
     const geometry = new Triangle(gl);

@@ -275,37 +275,36 @@ const HeroSection = () => {
   return (
     <section className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-28 sm:pt-32 md:pt-36 pb-14 sm:pb-16 md:pb-20 bg-[#036c99]">
       {/* GradientWaves Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <GradientWaves
           horizonColor="#036c99"
           waveColor="#838c8c"
           crestColor="#b5c2bc"
-          speed={0.4}
-          amplitude={2.5}
+          speed={0.35}
+          amplitude={2.2}
           waveScale={0.6}
           waveRatio={0.9}
-          swell={35}
-          turbulence={20}
+          swell={30}
+          turbulence={18}
           tilt={1.11}
           zoom={1.0}
           height={5.5}
           fogDepth={15}
-          detail="medium"
+          detail="low"
           brightness={1.2}
           opacity={1.0}
           mouseInteraction={true}
-          parallaxStrength={0.5}
-          grain={true}
-          grainIntensity={0.03}
+          parallaxStrength={0.4}
+          grain={false}
         />
       </div>
 
-      {/* Full-Screen 3D Interactive Spline Layer across Hero */}
-      <div className="absolute inset-0 z-[2] w-full h-full pointer-events-auto flex items-center justify-end overflow-visible">
-        <div className="w-full h-full lg:w-[62%] xl:w-[58%] lg:ml-auto flex items-center justify-center overflow-visible">
+      {/* Full-Screen 3D Interactive Spline Layer across Hero - Hidden on mobile, visible on lg+ */}
+      <div className="hidden lg:flex absolute inset-0 z-[2] w-full h-full pointer-events-none lg:pointer-events-auto items-center justify-end overflow-visible">
+        <div className="w-full h-full lg:w-[62%] xl:w-[58%] lg:ml-auto flex items-center justify-center overflow-visible pointer-events-none lg:pointer-events-auto">
           <SplineScene 
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full cursor-grab active:cursor-grabbing"
+            className="w-full h-full cursor-grab active:cursor-grabbing pointer-events-none lg:pointer-events-auto"
             fullScreenHover={true}
           />
         </div>
@@ -315,23 +314,23 @@ const HeroSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pointer-events-none">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center min-h-[500px] lg:min-h-[560px]">
           
-          {/* Left Column: 100% Left Aligned */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6 pointer-events-auto">
+          {/* Left Column: Balanced center header/actions on mobile with left-aligned trust points */}
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 pointer-events-auto mx-auto lg:mx-0 max-w-2xl lg:max-w-none">
             
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#b5c2bc] text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#b5c2bc] text-xs font-bold uppercase tracking-wider mx-auto lg:mx-0">
               <Sparkles className="w-3.5 h-3.5 text-[#b5c2bc]" />
               <span>Enterprise IT & Automation Pioneer</span>
             </div>
 
             {/* Title */}
-            <h1 className="font-heading text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#ffffff] leading-[1.08] text-left">
-              Easing Efforts & <br />
+            <h1 className="font-heading text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#ffffff] leading-[1.08] text-center lg:text-left">
+              Easing Efforts & <br className="hidden sm:inline lg:inline" />
               Multiplying Profits.
             </h1>
 
-            {/* CTA Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5 w-full sm:w-auto">
+            {/* CTA Buttons - Centered stack on mobile, inline on desktop */}
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 w-full sm:w-auto">
               <a
                 href="#appointment"
                 className="w-full sm:w-auto px-7 py-3.5 bg-white text-neutral-950 font-extrabold rounded-2xl shadow-xl hover:bg-neutral-100 transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base group hover:scale-105 active:scale-95 pointer-events-auto"
@@ -348,19 +347,19 @@ const HeroSection = () => {
               </a>
             </div>
 
-            {/* Trust highlights */}
-            <div className="pt-4 border-t border-white/15 w-full max-w-lg flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/80">
+            {/* Trust highlights - clean pills/chips on mobile */}
+            <div className="pt-4 border-t border-white/15 w-full max-w-lg flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs text-white/90 mx-auto lg:mx-0">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span>12+ Years Industry Experience</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                <span>50+ Happy Clients</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span>100+ Business Clients</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                <span>145+ Projects Completed</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span>24/7 SLA Guarantee</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                <span>100+ Winning Awards</span>
               </div>
             </div>
 
@@ -417,64 +416,64 @@ const AboutSection = () => {
           
           {/* Left Visual Bento */}
           <div className="lg:col-span-5 space-y-3 sm:space-y-4">
-            <div className="p-5 xs:p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#036c99] text-[#ffffff] shadow-xl relative overflow-hidden">
+            <div className="p-5 xs:p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#036c99] text-[#ffffff] shadow-xl relative overflow-hidden text-left flex flex-col items-start">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#b5c2bc]/10 rounded-full blur-2xl" />
               <div className="inline-block p-2.5 sm:p-3 bg-[#b5c2bc]/20 rounded-xl sm:rounded-2xl mb-4 sm:mb-6">
                 <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-[#b5c2bc]" />
               </div>
-              <h3 className="font-heading text-xl sm:text-2xl font-bold mb-2.5 sm:mb-3 text-[#ffffff] leading-tight">
+              <h3 className="font-heading text-xl sm:text-2xl font-bold mb-2.5 sm:mb-3 text-[#ffffff] leading-tight text-left">
                 Headquartered in Vashi, Navi Mumbai
               </h3>
-              <p className="text-xs sm:text-sm text-[#b5c2bc] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#b5c2bc] leading-relaxed text-left">
                 Operating out of Cyber One, Sector 30A. We thrive on an ambitious mission to empower business domains with modern automation.
               </p>
-              <div className="mt-5 sm:mt-6 pt-4 sm:pt-6 border-t border-[#b5c2bc]/20 flex items-center justify-between text-xs text-white/80">
+              <div className="mt-5 sm:mt-6 pt-4 sm:pt-6 border-t border-[#b5c2bc]/20 flex items-center justify-between text-xs text-white/80 w-full">
                 <span className="truncate pr-2">Plot No. 4 & 6, Sector 30A</span>
                 <span className="font-mono text-[#b5c2bc] flex-shrink-0">Est. 2010</span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
-              <div className="p-4 sm:p-6 rounded-2xl bg-[#ffffff] border border-[#b5c2bc]/40 shadow-sm">
+              <div className="p-4 sm:p-6 rounded-2xl bg-[#ffffff] border border-[#b5c2bc]/40 shadow-sm text-left flex flex-col items-start">
                 <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99] mb-1.5 sm:mb-2" />
                 <h4 className="font-bold text-xs sm:text-sm text-neutral-900">Client First</h4>
-                <p className="text-[11px] sm:text-xs text-neutral-600 font-medium mt-1 leading-normal">Dedicated support team for seamless integration.</p>
+                <p className="text-[11px] sm:text-xs text-neutral-600 font-medium mt-1 leading-normal text-left">Dedicated support team for seamless integration.</p>
               </div>
-              <div className="p-4 sm:p-6 rounded-2xl bg-[#b5c2bc]/20 border border-[#b5c2bc]/40">
+              <div className="p-4 sm:p-6 rounded-2xl bg-[#b5c2bc]/20 border border-[#b5c2bc]/40 text-left flex flex-col items-start">
                 <Cpu className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99] mb-1.5 sm:mb-2" />
                 <h4 className="font-bold text-xs sm:text-sm text-neutral-900">Product Driven</h4>
-                <p className="text-[11px] sm:text-xs text-neutral-600 font-medium mt-1 leading-normal">Pre-built solutions ready to deploy.</p>
+                <p className="text-[11px] sm:text-xs text-neutral-600 font-medium mt-1 leading-normal text-left">Pre-built solutions ready to deploy.</p>
               </div>
             </div>
           </div>
 
           {/* Right Narrative */}
-          <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#036c99]/10 border border-[#036c99]/20 text-xs font-bold text-[#036c99] uppercase tracking-wider">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#036c99]/10 border border-[#036c99]/20 text-xs font-bold text-[#036c99] uppercase tracking-wider mx-auto lg:mx-0">
               Company Overview
             </div>
 
-            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold text-neutral-900 leading-tight">
+            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold text-neutral-900 leading-tight text-center lg:text-left">
               Bridging the gap between business domains and the IT industry since 2010.
             </h2>
 
-            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal text-left sm:text-center lg:text-left">
               Futurescape Technologies Private Limited was founded with a clear vision: to seamlessly integrate modern software engineering into specific business management processes. Our prime objective is to make technology simple, reliable, and accessible for businesses of all scales.
             </p>
 
-            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal text-left sm:text-center lg:text-left">
               With over a decade of hands-on experience and having empowered more than 100 businesses, we stand as a trusted pioneer in developing automated management systems tailored to acquire specific process requirements and deliver optimal efficiency.
             </p>
 
             {/* Bullet Points */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 sm:pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 sm:pt-4 w-full justify-items-start sm:justify-items-center lg:justify-items-start">
               {[
                 'Tailored IT Solutions',
                 'Dedicated Client Support',
                 'Proven Automation Process',
                 'Product & Custom Development',
               ].map((item, index) => (
-                <div key={index} className="flex items-center gap-2.5 sm:gap-3">
+                <div key={index} className="flex items-center justify-start gap-2.5 sm:gap-3 w-full sm:w-auto">
                   <div className="w-5 h-5 rounded-full bg-[#036c99] text-[#ffffff] flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="w-3.5 h-3.5 text-white" />
                   </div>
@@ -483,7 +482,7 @@ const AboutSection = () => {
               ))}
             </div>
 
-            <div className="pt-3 sm:pt-6">
+            <div className="pt-3 sm:pt-6 w-full flex justify-center lg:justify-start">
               <a
                 href="#contact"
                 className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-neutral-900 hover:text-[#036c99] transition-colors border-b-2 border-neutral-900 pb-1"
@@ -524,13 +523,16 @@ const ProductsSection = () => {
         });
       });
 
+      const isMobile = window.innerWidth < 768;
+      const scrollDistance = isMobile ? Math.min(window.innerHeight * 3, 2400) : Math.min(window.innerHeight * 4.5, 3600);
+
       ScrollTrigger.create({
         trigger: stickySection,
         start: "top top",
-        end: `+=${window.innerHeight * 8}px`,
+        end: `+=${scrollDistance}px`,
         pin: true,
         pinSpacing: true,
-        scrub: 1,
+        scrub: 0.6,
         onUpdate: (self) => {
           const progress = self.progress;
           const activeIndex = Math.min(Math.floor(progress / segmentSize), totalCards - 1);
@@ -876,66 +878,67 @@ const WhyUsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
           
-          <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#036c99]/10 border border-[#036c99]/20 text-[#036c99] text-xs font-bold uppercase tracking-wider">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#036c99]/10 border border-[#036c99]/20 text-[#036c99] text-xs font-bold uppercase tracking-wider mx-auto lg:mx-0">
               Dedicated Support & Experience
             </div>
             
-            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 leading-tight">
+            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 leading-tight text-center lg:text-left">
               12 Years of Experience Empowering Businesses
             </h2>
 
-            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal text-left sm:text-center lg:text-left">
               With over a decade of hands-on technical evolution, having empowered more than 100 businesses, we are one of the pioneer technology solution providers dedicated to helping you maximize operational profit.
             </p>
 
-            <div className="p-4 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm space-y-2 sm:space-y-3">
+            <div className="p-4 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm space-y-2 sm:space-y-3 text-left flex flex-col items-start w-full">
               <h3 className="font-heading text-base sm:text-lg font-bold text-neutral-900 flex items-center gap-2">
                 <Users className="w-5 h-5 text-[#036c99] flex-shrink-0" />
                 <span>Dedicated Client Support Team</span>
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-normal text-left">
                 Our client support team is always present to ensure that your experience with our agency and software solutions is smooth, pleasant, and fruitful.
               </p>
             </div>
           </div>
 
           <div className="lg:col-span-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-left">
               
-              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm flex flex-col justify-between min-h-[140px] sm:h-48 hover:shadow-md transition-all">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm flex flex-col items-start justify-between min-h-[140px] sm:h-48 hover:shadow-md transition-all">
                 <div className="p-2.5 sm:p-3 bg-[#036c99]/10 w-fit rounded-xl">
-                  <Award className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99]" />
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99]" />
                 </div>
-                <div className="mt-3 sm:mt-0">
-                  <span className="font-heading text-2xl sm:text-3xl font-extrabold text-neutral-900">100+</span>
-                  <p className="text-xs text-neutral-600 font-semibold mt-0.5 sm:mt-1">Winning Awards & Recognition</p>
+                <div className="mt-3 sm:mt-0 text-left">
+                  <span className="font-heading text-2xl sm:text-3xl font-extrabold text-neutral-900">50+</span>
+                  <p className="text-xs text-neutral-600 font-semibold mt-0.5 sm:mt-1">Happy Clients</p>
                 </div>
               </div>
 
-              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm flex flex-col justify-between min-h-[140px] sm:h-48 hover:shadow-md transition-all">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm flex flex-col items-start justify-between min-h-[140px] sm:h-48 hover:shadow-md transition-all">
                 <div className="p-2.5 sm:p-3 bg-[#036c99]/10 w-fit rounded-xl">
-                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99]" />
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99]" />
                 </div>
-                <div className="mt-3 sm:mt-0">
-                  <span className="font-heading text-2xl sm:text-3xl font-extrabold text-neutral-900">24/7</span>
-                  <p className="text-xs text-neutral-600 font-semibold mt-0.5 sm:mt-1">System Health Monitoring</p>
+                <div className="mt-3 sm:mt-0 text-left">
+                  <span className="font-heading text-2xl sm:text-3xl font-extrabold text-neutral-900">145+</span>
+                  <p className="text-xs text-neutral-600 font-semibold mt-0.5 sm:mt-1">Projects Completed</p>
                 </div>
               </div>
 
-              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm flex flex-col justify-between min-h-[150px] sm:h-48 sm:col-span-2 hover:shadow-md transition-all">
-                <div className="flex items-center justify-between">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#b5c2bc]/40 shadow-sm flex flex-col items-start justify-between min-h-[150px] sm:h-48 sm:col-span-2 hover:shadow-md transition-all">
+                <div className="flex flex-row items-center justify-between w-full gap-2">
                   <div className="p-2.5 sm:p-3 bg-[#036c99]/10 rounded-xl">
-                    <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99]" />
+                    <Award className="w-5 h-5 sm:w-6 sm:h-6 text-[#036c99]" />
                   </div>
                   <span className="text-[11px] sm:text-xs font-bold text-[#036c99] bg-[#036c99]/10 px-2.5 sm:px-3 py-1 rounded-full">
-                    Active SLA Guarantee
+                    Industry Recognized
                   </span>
                 </div>
-                <div className="mt-3 sm:mt-0">
-                  <h4 className="font-bold text-sm sm:text-base text-neutral-900">Enterprise Grade Reliability</h4>
-                  <p className="text-xs text-neutral-600 mt-1 font-normal leading-relaxed">
-                    Continuous updates, daily backups, and instant client support for all Futurescape software products.
+                <div className="mt-3 sm:mt-0 text-left w-full">
+                  <span className="font-heading text-2xl sm:text-3xl font-extrabold text-neutral-900 block mb-0.5">100+</span>
+                  <h4 className="font-bold text-sm sm:text-base text-neutral-900">Winning Awards &amp; Recognition</h4>
+                  <p className="text-xs text-neutral-600 mt-1 font-normal leading-relaxed text-left">
+                    Recognized industry-wide for excellence in automated management systems and enterprise software innovation.
                   </p>
                 </div>
               </div>
@@ -974,14 +977,14 @@ const AppointmentSection = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-16 items-start">
             {/* Left Column: Heading and Text */}
-            <div className="lg:col-span-2 text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#036c99] text-[#ffffff] text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4">
+            <div className="lg:col-span-2 text-center lg:text-left flex flex-col items-center lg:items-start">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#036c99] text-[#ffffff] text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 mx-auto lg:mx-0">
                 Free Demonstration
               </div>
-              <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 leading-tight">
+              <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 leading-tight text-center lg:text-left">
                 Make an Appointment & Request Demo
               </h2>
-              <p className="mt-3 sm:mt-5 text-sm xs:text-base sm:text-lg text-neutral-700 leading-relaxed font-normal">
+              <p className="mt-3 sm:mt-5 text-sm xs:text-base sm:text-lg text-neutral-700 leading-relaxed font-normal text-left sm:text-center lg:text-left">
                 What to expect from the free demo? Our experts will walk you through live software workflows tailored specifically to your domain requirements.
               </p>
             </div>
@@ -1002,7 +1005,7 @@ const AppointmentSection = () => {
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2 text-left">
                         Full Name *
                       </label>
                       <input
@@ -1011,11 +1014,11 @@ const AppointmentSection = () => {
                         placeholder="e.g. Rahul Sharma"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                        className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all text-left"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2 text-left">
                         Email Address *
                       </label>
                       <input
@@ -1024,14 +1027,14 @@ const AppointmentSection = () => {
                         placeholder="contact@company.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                        className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all text-left"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2 text-left">
                         Phone Number *
                       </label>
                       <input
@@ -1040,13 +1043,13 @@ const AppointmentSection = () => {
                         placeholder="022 45740221"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all"
+                        className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all text-left"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-neutral-900 mb-1.5 sm:mb-2 text-left">
                       Additional Notes or Questions
                     </label>
                     <textarea
@@ -1054,12 +1057,12 @@ const AppointmentSection = () => {
                       placeholder="Tell us about your process requirements..."
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all resize-none"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-neutral-50 border border-[#b5c2bc]/50 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 focus:bg-white transition-all resize-none text-left"
                     />
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-[#b5c2bc]/20">
-                    <span className="text-xs text-neutral-600 font-medium text-center sm:text-left">
+                    <span className="text-xs text-neutral-600 font-medium text-left">
                       * No obligation, 100% free product demonstration.
                     </span>
                     <button
@@ -1189,25 +1192,22 @@ const BlogSection = () => {
     <section id="blog" className="py-14 sm:py-20 md:py-28 bg-[#f4f3f3] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#036c99] text-[#ffffff] text-xs font-bold uppercase tracking-wider mb-2.5 sm:mb-3">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 text-center md:text-left items-center md:items-start">
+          <div className="flex flex-col items-center md:items-start">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#036c99] text-[#ffffff] text-xs font-bold uppercase tracking-wider mb-2.5 sm:mb-3 mx-auto md:mx-0">
               Industry Insights
             </div>
-            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold text-neutral-900">
+            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold text-neutral-900 text-center md:text-left">
               Read Our Latest News & Blog
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-neutral-600 font-medium max-w-xs mt-2 md:mt-0">
-            Updated regularly with deep-dives into AI, software engineering, and business automation.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {articles.map((art, idx) => (
             <article
               key={idx}
-              className="rounded-2xl sm:rounded-3xl bg-[#ffffff] border border-[#b5c2bc]/40 p-4 sm:p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group"
+              className="rounded-2xl sm:rounded-3xl bg-[#ffffff] border border-[#b5c2bc]/40 p-4 sm:p-6 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group text-left"
             >
               <div>
                 <div className="flex items-center justify-between text-xs text-neutral-500 mb-3 sm:mb-4 font-medium">
@@ -1217,16 +1217,16 @@ const BlogSection = () => {
                   <span className="text-[11px] sm:text-xs">{art.date}</span>
                 </div>
 
-                <h3 className="font-heading text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#036c99] transition-colors leading-snug mb-2 sm:mb-3">
+                <h3 className="font-heading text-base sm:text-lg font-bold text-neutral-900 group-hover:text-[#036c99] transition-colors leading-snug mb-2 sm:mb-3 text-left">
                   {art.title}
                 </h3>
 
-                <p className="text-xs text-neutral-600 leading-relaxed mb-4 sm:mb-6 font-normal">
+                <p className="text-xs text-neutral-600 leading-relaxed mb-4 sm:mb-6 font-normal text-left">
                   {art.snippet}
                 </p>
               </div>
 
-              <div className="pt-3 sm:pt-4 border-t border-[#b5c2bc]/20 flex items-center justify-between text-xs">
+              <div className="pt-3 sm:pt-4 border-t border-[#b5c2bc]/20 flex items-center justify-between text-xs w-full">
                 <span className="font-medium text-neutral-600 text-[11px] sm:text-xs">by {art.author}</span>
                 <a
                   href="#blog"
@@ -1307,21 +1307,21 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-start">
           
           {/* Left Column: Contact details */}
-          <div className="lg:col-span-5 space-y-4 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#036c99]/10 border border-[#036c99]/20 text-xs font-bold text-[#036c99] uppercase tracking-wider">
+          <div className="lg:col-span-5 space-y-4 sm:space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#036c99]/10 border border-[#036c99]/20 text-xs font-bold text-[#036c99] uppercase tracking-wider mx-auto lg:mx-0">
               Contact & Location
             </div>
 
-            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold text-neutral-900 leading-tight">
+            <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold text-neutral-900 leading-tight text-center lg:text-left">
               Headquartered at Vashi, Navi Mumbai
             </h2>
 
-            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-normal text-left sm:text-center lg:text-left">
               <strong>Futurescape Technologies Private Limited</strong> is located at Cyber One, 1904, Plot No. 4 &amp; 6, Sector 30A, Vashi, Navi Mumbai, Maharashtra 400703. We thrive on an ambitious mission to empower businesses with cutting-edge software and automation.
             </p>
 
-            <div className="space-y-3 sm:space-y-4 pt-1 sm:pt-2">
-              <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4f3f3] border border-[#b5c2bc]/30">
+            <div className="space-y-3 sm:space-y-4 pt-1 sm:pt-2 w-full">
+              <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4f3f3] border border-[#b5c2bc]/30 text-left">
                 <div className="p-2.5 sm:p-3 bg-[#036c99] text-[#ffffff] rounded-xl flex-shrink-0">
                   <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
@@ -1333,7 +1333,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4f3f3] border border-[#b5c2bc]/30">
+              <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4f3f3] border border-[#b5c2bc]/30 text-left">
                 <div className="p-2.5 sm:p-3 bg-[#036c99] text-[#ffffff] rounded-xl flex-shrink-0">
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
@@ -1345,7 +1345,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4f3f3] border border-[#b5c2bc]/30">
+              <div className="flex items-start gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#f4f3f3] border border-[#b5c2bc]/30 text-left">
                 <div className="p-2.5 sm:p-3 bg-[#036c99] text-[#ffffff] rounded-xl flex-shrink-0">
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
@@ -1358,7 +1358,7 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="p-4 sm:p-5 rounded-2xl bg-neutral-50 border border-neutral-200">
+            <div className="p-4 sm:p-5 rounded-2xl bg-neutral-50 border border-neutral-200 w-full text-left">
               <span className="text-xs font-bold text-neutral-900 uppercase tracking-wider block mb-1">
                 Office Working Hours
               </span>
@@ -1405,7 +1405,7 @@ const ContactSection = () => {
               </div>
 
               {/* Map Footer Bar */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1 text-left">
                 <div className="text-xs text-neutral-700 text-left">
                   <span className="font-bold text-neutral-900 block sm:inline">Futurescape Technologies Private Limited</span>
                   <p className="text-[11px] text-neutral-500 mt-0.5">1904, Cyber One, Sector 30A, Vashi, Navi Mumbai, Maharashtra 400703</p>
@@ -1437,28 +1437,28 @@ const Footer = () => {
     <footer className="bg-[#036c99] text-[#ffffff] pt-16 pb-12 border-t border-[#b5c2bc]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[#b5c2bc]/20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 pb-12 border-b border-[#b5c2bc]/20 text-left">
           
           {/* Brand Info */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center">
+          <div className="lg:col-span-2 space-y-4 flex flex-col items-start text-left">
+            <div className="flex items-center justify-start">
               <Logo light />
             </div>
-            <p className="text-xs text-[#b5c2bc] leading-relaxed max-w-sm">
+            <p className="text-xs text-[#b5c2bc] leading-relaxed max-w-sm text-left">
               We are a renowned technology service provider headquartered at Cyber One, 1904, Sector 30A, Vashi, Navi Mumbai, Maharashtra 400703, thriving with ambition to empower business domains with technology and automation.
             </p>
-            <div className="pt-2 text-xs text-white/80">
+            <div className="pt-2 text-xs text-white/80 text-left">
               Phone: <a href="tel:02245740221" className="text-[#ffffff] hover:underline">022 45740221</a><br />
               Email: <a href="mailto:contact@futurescapetech.com" className="text-[#ffffff] hover:underline">contact@futurescapetech.com</a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-heading font-bold text-sm text-[#ffffff] uppercase tracking-wider mb-4">
+          <div className="flex flex-col items-start">
+            <h4 className="font-heading font-bold text-sm text-[#ffffff] uppercase tracking-wider mb-4 text-left">
               Quick Links
             </h4>
-            <ul className="space-y-2.5 text-xs text-[#b5c2bc]">
+            <ul className="space-y-2.5 text-xs text-[#b5c2bc] text-left">
               <li><a href="#about" className="hover:text-[#ffffff] transition-colors">About Us</a></li>
               <li><a href="#services" className="hover:text-[#ffffff] transition-colors">Services</a></li>
               <li><a href="#testimonials" className="hover:text-[#ffffff] transition-colors">Testimonials</a></li>
@@ -1470,11 +1470,11 @@ const Footer = () => {
           </div>
 
           {/* Products List */}
-          <div>
-            <h4 className="font-heading font-bold text-sm text-[#ffffff] uppercase tracking-wider mb-4">
+          <div className="flex flex-col items-start">
+            <h4 className="font-heading font-bold text-sm text-[#ffffff] uppercase tracking-wider mb-4 text-left">
               Our Products
             </h4>
-            <ul className="space-y-2.5 text-xs text-[#b5c2bc]">
+            <ul className="space-y-2.5 text-xs text-[#b5c2bc] text-left">
               <li><a href="#products" className="hover:text-[#ffffff] transition-colors font-semibold text-[#ffffff]">oneapp</a></li>
               <li><a href="#products" className="hover:text-[#ffffff] transition-colors">onesociety</a></li>
               <li><a href="#products" className="hover:text-[#ffffff] transition-colors">onefooddialer</a></li>
@@ -1485,14 +1485,14 @@ const Footer = () => {
           </div>
 
           {/* Contact Info Box */}
-          <div>
-            <h4 className="font-heading font-bold text-sm text-[#ffffff] uppercase tracking-wider mb-4">
+          <div className="flex flex-col items-start">
+            <h4 className="font-heading font-bold text-sm text-[#ffffff] uppercase tracking-wider mb-4 text-left">
               Headquarters
             </h4>
-            <div className="p-4 rounded-2xl bg-[#ffffff]/5 border border-[#b5c2bc]/20 text-xs text-[#b5c2bc] space-y-2">
+            <div className="p-4 rounded-2xl bg-[#ffffff]/5 border border-[#b5c2bc]/20 text-xs text-[#b5c2bc] space-y-2 text-left max-w-sm w-full">
               <p className="font-semibold text-[#ffffff]">Cyber One Tower</p>
               <p>1904, Plot No. 4 &amp; 6, Sector 30A, Vashi, Navi Mumbai, Maharashtra 400703.</p>
-              <div className="pt-2">
+              <div className="pt-2 flex justify-start">
                 <a
                   href="#appointment"
                   className="inline-block px-3 py-1.5 bg-[#b5c2bc]/20 text-[#ffffff] font-bold rounded-lg text-[11px] hover:bg-[#b5c2bc] hover:text-neutral-900 transition-all"
@@ -1506,9 +1506,9 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80 text-center sm:text-left">
           <p>© 2026 All Rights Reserved by Futurescape Technology .</p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center justify-center gap-6">
             <a href="#" className="hover:text-[#ffffff] transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-[#ffffff] transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-[#ffffff] transition-colors">Sitemap</a>
@@ -1522,13 +1522,14 @@ const Footer = () => {
 
 export default function App() {
   useEffect(() => {
-    // Initialize Lenis for premium inertial smooth scrolling
+    // Initialize Lenis for premium inertial smooth scrolling on wheel while preserving native 120Hz touch scroll on mobile
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing for buttery feel
+      duration: 1.0,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 0, // Disable touch hijacking to allow 100% native butter-smooth mobile touch scrolling
+      syncTouch: false,
     });
 
     // Sync Lenis with GSAP ScrollTrigger
@@ -1537,7 +1538,7 @@ export default function App() {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(onTick);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Handle anchor links manually since we removed native scroll-behavior: smooth
     const handleAnchorClick = (e: MouseEvent) => {
@@ -1545,15 +1546,15 @@ export default function App() {
       const href = target.getAttribute('href');
       if (href && href.startsWith('#')) {
         e.preventDefault();
-        lenis.scrollTo(href);
+        lenis.scrollTo(href, { offset: -60, duration: 1.2 });
       }
     };
 
     const anchors = document.querySelectorAll('a[href^="#"]');
-    anchors.forEach(anchor => anchor.addEventListener('click', handleAnchorClick));
+    anchors.forEach(anchor => anchor.addEventListener('click', handleAnchorClick as any));
 
     return () => {
-      anchors.forEach(anchor => anchor.removeEventListener('click', handleAnchorClick));
+      anchors.forEach(anchor => anchor.removeEventListener('click', handleAnchorClick as any));
       gsap.ticker.remove(onTick);
       lenis.destroy();
     };

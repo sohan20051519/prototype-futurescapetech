@@ -18,6 +18,7 @@ export function SplineScene({
   fullScreenHover = true,
   initialZoom,
 }: SplineSceneProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const splineAppRef = useRef<Application | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -106,6 +107,7 @@ export function SplineScene({
             if (rawApp._renderer.domElement) {
               rawApp._renderer.domElement.style.background = 'transparent'
               rawApp._renderer.domElement.style.backgroundColor = 'transparent'
+              rawApp._renderer.domElement.style.touchAction = 'pan-y'
             }
           }
 
@@ -148,67 +150,77 @@ export function SplineScene({
 
   // Handle window resize zoom adjustment
   useEffect(() => {
+    let resizeTimer: any
     const handleResize = () => {
-      updateCameraZoom()
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        updateCameraZoom()
+      }, 100)
     }
     window.addEventListener('resize', handleResize, { passive: true })
-    return () => window.removeEventListener('resize', handleResize)
+    return () => {
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [updateCameraZoom])
 
-  // Full-screen hover mouse event forwarding so the 3D model tracks cursor from anywhere on screen
+  // Throttled mouse movement for desktop cursor tracking only (never touches)
   useEffect(() => {
     if (!fullScreenHover) return
 
-    const handleGlobalPointerMove = (e: PointerEvent | MouseEvent) => {
+    // Disable fullScreenHover on touch devices to avoid any interference with scrolling
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    if (isTouchDevice && window.innerWidth < 1024) return
+
+    let rafId: number | null = null
+
+    const handleGlobalPointerMove = (e: PointerEvent) => {
+      // Ignore touch inputs completely - let native scrolling handle touch seamlessly
+      if (e.pointerType === 'touch') return
+
       const app = splineAppRef.current as any
       if (!app) return
 
       const canvas = canvasRef.current || app.canvas || app._renderer?.domElement
-      if (!canvas) return
+      if (!canvas || e.target === canvas) return
 
-      // Avoid re-dispatching if already hovering over canvas directly
-      if (e.target === canvas) return
+      if (rafId !== null) return
 
-      try {
-        const pointerEvt = new PointerEvent('pointermove', {
-          clientX: e.clientX,
-          clientY: e.clientY,
-          screenX: e.screenX,
-          screenY: e.screenY,
-          bubbles: true,
-          cancelable: true,
-          pointerType: 'mouse',
-        })
-        canvas.dispatchEvent(pointerEvt)
-
-        const mouseEvt = new MouseEvent('mousemove', {
-          clientX: e.clientX,
-          clientY: e.clientY,
-          screenX: e.screenX,
-          screenY: e.screenY,
-          bubbles: true,
-          cancelable: true,
-          view: window,
-        })
-        canvas.dispatchEvent(mouseEvt)
-      } catch {
-        // Fallback silently
-      }
+      rafId = requestAnimationFrame(() => {
+        rafId = null
+        try {
+          const pointerEvt = new PointerEvent('pointermove', {
+            clientX: e.clientX,
+            clientY: e.clientY,
+            screenX: e.screenX,
+            screenY: e.screenY,
+            bubbles: true,
+            cancelable: false,
+            pointerType: 'mouse',
+          })
+          canvas.dispatchEvent(pointerEvt)
+        } catch {
+          // Silent fallback
+        }
+      })
     }
 
     window.addEventListener('pointermove', handleGlobalPointerMove, { passive: true })
-    window.addEventListener('mousemove', handleGlobalPointerMove, { passive: true })
 
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId)
       window.removeEventListener('pointermove', handleGlobalPointerMove)
-      window.removeEventListener('mousemove', handleGlobalPointerMove)
     }
   }, [fullScreenHover])
 
   return (
     <div
-      className={`relative w-full h-full min-h-[300px] overflow-visible flex items-center justify-center ${className || ''}`}
-      style={style}
+      ref={containerRef}
+      className={`relative w-full h-full min-h-[300px] overflow-visible flex items-center justify-center pointer-events-none lg:pointer-events-auto ${className || ''}`}
+      style={{
+        touchAction: 'pan-y',
+        ...style,
+      }}
     >
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
@@ -224,12 +236,13 @@ export function SplineScene({
 
       <canvas
         ref={canvasRef}
-        className="w-full h-full !bg-transparent block touch-none"
+        className="w-full h-full !bg-transparent block pointer-events-none lg:pointer-events-auto"
         style={{
           width: '100%',
           height: '100%',
           background: 'transparent',
           backgroundColor: 'transparent',
+          touchAction: 'pan-y',
         }}
       />
     </div>
