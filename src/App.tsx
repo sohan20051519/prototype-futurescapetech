@@ -300,9 +300,8 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* Full-Screen 3D Interactive Spline Layer */}
-      {/* On desktop (lg+): Full-screen right-aligned overlay */}
-      <div className="hidden lg:flex absolute inset-0 z-[2] w-full h-full pointer-events-auto items-center justify-end overflow-visible">
+      {/* Full-Screen 3D Interactive Spline Layer across Hero */}
+      <div className="absolute inset-0 z-[2] w-full h-full pointer-events-auto flex items-center justify-end overflow-visible">
         <div className="w-full h-full lg:w-[62%] xl:w-[58%] lg:ml-auto flex items-center justify-center overflow-visible">
           <SplineScene 
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
@@ -314,44 +313,35 @@ const HeroSection = () => {
 
       {/* Foreground Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pointer-events-none">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center min-h-[500px] lg:min-h-[560px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center min-h-[500px] lg:min-h-[560px]">
           
-          {/* Left Column / Mobile Content Flow */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5 sm:space-y-6 pointer-events-auto">
+          {/* Left Column: 100% Left Aligned */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6 pointer-events-auto">
             
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#b5c2bc] text-xs font-bold uppercase tracking-wider max-md:shadow-[0_4px_14px_rgba(0,0,0,0.35)] max-md:[text-shadow:_0_1px_4px_rgba(0,0,0,0.6)] md:shadow-none">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#b5c2bc] text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-[#b5c2bc]" />
               <span>Enterprise IT & Automation Pioneer</span>
             </div>
 
             {/* Title */}
-            <h1 className="font-heading text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#ffffff] leading-[1.1] sm:leading-[1.08] text-left max-md:[text-shadow:_0_2px_12px_rgba(0,0,0,0.85),_0_4px_24px_rgba(0,0,0,0.65)] md:text-shadow-none">
+            <h1 className="font-heading text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#ffffff] leading-[1.08] text-left">
               Easing Efforts & <br />
               Multiplying Profits.
             </h1>
 
-            {/* Mobile-Only 3D Robot Interactive Canvas */}
-            <div className="lg:hidden w-full h-[260px] xs:h-[300px] sm:h-[340px] relative overflow-visible flex items-center justify-center my-1 pointer-events-auto">
-              <SplineScene 
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full cursor-grab active:cursor-grabbing"
-                fullScreenHover={true}
-              />
-            </div>
-
             {/* CTA Buttons */}
-            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5 w-full sm:w-auto">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5 w-full sm:w-auto">
               <a
                 href="#appointment"
-                className="w-full sm:w-auto px-7 py-3.5 bg-white text-neutral-950 font-extrabold rounded-2xl shadow-xl hover:bg-neutral-100 transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base group hover:scale-105 active:scale-95 pointer-events-auto max-md:shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+                className="w-full sm:w-auto px-7 py-3.5 bg-white text-neutral-950 font-extrabold rounded-2xl shadow-xl hover:bg-neutral-100 transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base group hover:scale-105 active:scale-95 pointer-events-auto"
               >
                 Make an Appointment
                 <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
               <a
                 href="#products"
-                className="w-full sm:w-auto px-7 py-3.5 bg-[#036c99]/80 backdrop-blur-sm text-[#ffffff] border border-white/30 font-bold rounded-2xl shadow-sm hover:bg-[#025275] transition-all flex items-center justify-center gap-2 text-sm sm:text-base hover:scale-105 active:scale-95 pointer-events-auto max-md:shadow-[0_8px_24px_rgba(0,0,0,0.45)] max-md:[text-shadow:_0_1px_4px_rgba(0,0,0,0.7)] md:text-shadow-none"
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#036c99]/80 backdrop-blur-sm text-[#ffffff] border border-white/30 font-bold rounded-2xl shadow-sm hover:bg-[#025275] transition-all flex items-center justify-center gap-2 text-sm sm:text-base hover:scale-105 active:scale-95 pointer-events-auto"
               >
                 Explore Products
                 <ChevronDown className="w-4 h-4 text-white" />
@@ -359,18 +349,18 @@ const HeroSection = () => {
             </div>
 
             {/* Trust highlights */}
-            <div className="pt-3 sm:pt-4 border-t border-white/15 w-full max-w-xl flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/80 max-md:[text-shadow:_0_1px_8px_rgba(0,0,0,0.85)] md:text-shadow-none">
+            <div className="pt-4 border-t border-white/15 w-full max-w-lg flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/80">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 max-md:drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]" />
-                <span>50+ Happy Clients</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>12+ Years Industry Experience</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 max-md:drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]" />
-                <span>145+ Projects Completed</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>100+ Business Clients</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 max-md:drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]" />
-                <span>100+ Winning Awards</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <span>24/7 SLA Guarantee</span>
               </div>
             </div>
 
