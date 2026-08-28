@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import GradientWaves from './components/GradientWaves';
 import { TestimonialsSection } from './components/ui/testimonial-v2';
+import { SplineScene } from '@/components/ui/splite';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -272,7 +273,7 @@ const Header = () => {
 
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-32 md:pt-40 pb-16 md:pb-24 bg-[#036c99]">
+    <section className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-28 sm:pt-32 md:pt-36 pb-14 sm:pb-16 md:pb-20 bg-[#036c99]">
       {/* GradientWaves Background */}
       <div className="absolute inset-0 z-0">
         <GradientWaves
@@ -299,34 +300,84 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+      {/* Full-Screen 3D Interactive Spline Layer */}
+      {/* On desktop (lg+): Full-screen right-aligned overlay */}
+      <div className="hidden lg:flex absolute inset-0 z-[2] w-full h-full pointer-events-auto items-center justify-end overflow-visible">
+        <div className="w-full h-full lg:w-[62%] xl:w-[58%] lg:ml-auto flex items-center justify-center overflow-visible">
+          <SplineScene 
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full cursor-grab active:cursor-grabbing"
+            fullScreenHover={true}
+          />
+        </div>
+      </div>
+
+      {/* Foreground Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pointer-events-none">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center min-h-[500px] lg:min-h-[560px]">
           
-          {/* Title */}
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-[#ffffff] leading-[1.1]">
-            Easing Efforts & <br className="hidden sm:inline" />
-            Multiplying Profits.
-          </h1>
+          {/* Left Column / Mobile Content Flow */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5 sm:space-y-6 pointer-events-auto">
+            
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#b5c2bc] text-xs font-bold uppercase tracking-wider max-md:shadow-[0_4px_14px_rgba(0,0,0,0.35)] max-md:[text-shadow:_0_1px_4px_rgba(0,0,0,0.6)] md:shadow-none">
+              <Sparkles className="w-3.5 h-3.5 text-[#b5c2bc]" />
+              <span>Enterprise IT & Automation Pioneer</span>
+            </div>
 
-          {/* Description */}
+            {/* Title */}
+            <h1 className="font-heading text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#ffffff] leading-[1.1] sm:leading-[1.08] text-left max-md:[text-shadow:_0_2px_12px_rgba(0,0,0,0.85),_0_4px_24px_rgba(0,0,0,0.65)] md:text-shadow-none">
+              Easing Efforts & <br />
+              Multiplying Profits.
+            </h1>
 
-          {/* CTA Buttons */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-            <a
-              href="#appointment"
-              className="w-full sm:w-auto px-8 py-4 bg-white text-neutral-950 font-extrabold rounded-2xl shadow-xl hover:bg-neutral-100 transition-all flex items-center justify-center gap-3 text-base group hover:scale-105"
-            >
-              Make an Appointment
-              <ArrowUpRight className="w-5 h-5 text-neutral-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
-            <a
-              href="#products"
-              className="w-full sm:w-auto px-8 py-4 bg-[#036c99] text-[#ffffff] border border-white/30 font-bold rounded-2xl shadow-sm hover:bg-[#025275] transition-all flex items-center justify-center gap-2 text-base hover:scale-105"
-            >
-              Explore Products
-              <ChevronDown className="w-4 h-4 text-white" />
-            </a>
+            {/* Mobile-Only 3D Robot Interactive Canvas */}
+            <div className="lg:hidden w-full h-[260px] xs:h-[300px] sm:h-[340px] relative overflow-visible flex items-center justify-center my-1 pointer-events-auto">
+              <SplineScene 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full cursor-grab active:cursor-grabbing"
+                fullScreenHover={true}
+              />
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3.5 w-full sm:w-auto">
+              <a
+                href="#appointment"
+                className="w-full sm:w-auto px-7 py-3.5 bg-white text-neutral-950 font-extrabold rounded-2xl shadow-xl hover:bg-neutral-100 transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base group hover:scale-105 active:scale-95 pointer-events-auto max-md:shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+              >
+                Make an Appointment
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+              <a
+                href="#products"
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#036c99]/80 backdrop-blur-sm text-[#ffffff] border border-white/30 font-bold rounded-2xl shadow-sm hover:bg-[#025275] transition-all flex items-center justify-center gap-2 text-sm sm:text-base hover:scale-105 active:scale-95 pointer-events-auto max-md:shadow-[0_8px_24px_rgba(0,0,0,0.45)] max-md:[text-shadow:_0_1px_4px_rgba(0,0,0,0.7)] md:text-shadow-none"
+              >
+                Explore Products
+                <ChevronDown className="w-4 h-4 text-white" />
+              </a>
+            </div>
+
+            {/* Trust highlights */}
+            <div className="pt-3 sm:pt-4 border-t border-white/15 w-full max-w-xl flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/80 max-md:[text-shadow:_0_1px_8px_rgba(0,0,0,0.85)] md:text-shadow-none">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 max-md:drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]" />
+                <span>50+ Happy Clients</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 max-md:drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]" />
+                <span>145+ Projects Completed</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 max-md:drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]" />
+                <span>100+ Winning Awards</span>
+              </div>
+            </div>
+
           </div>
+
+          {/* Right Column Spacer on Desktop */}
+          <div className="hidden lg:block lg:col-span-5 min-h-[300px] pointer-events-none" />
 
         </div>
       </div>
@@ -594,7 +645,8 @@ const ProductsSection = () => {
         .sticky-cards-section-wrapper .intro {
           position: relative;
           width: 100%;
-          height: 35svh;
+          height: 24svh;
+          min-height: 140px;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -602,6 +654,7 @@ const ProductsSection = () => {
           text-align: center;
           background-color: #f1f3f4;
           z-index: 10;
+          padding: 1rem 1rem 0;
         }
 
         .sticky-cards-section-wrapper .intro .badge {
@@ -616,12 +669,12 @@ const ProductsSection = () => {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.5rem;
         }
 
         .sticky-cards-section-wrapper .intro h2 {
           font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: 2.5rem;
+          font-size: 2rem;
           font-weight: 800;
           color: #111827;
           margin: 0;
@@ -629,40 +682,35 @@ const ProductsSection = () => {
 
         @media (min-width: 640px) {
           .sticky-cards-section-wrapper .intro h2 {
-            font-size: 3rem;
+            font-size: 2.75rem;
+          }
+          .sticky-cards-section-wrapper .intro {
+            height: 28svh;
           }
         }
 
         .sticky-cards-section-wrapper .gsap-card {
           position: absolute;
-          top: 55%;
+          top: 50%;
           left: 50%;
           width: 85%;
           max-width: 900px;
-          height: 65%;
+          height: 55%;
+          max-height: 480px;
           display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          gap: 1.5rem;
-          padding: 2rem;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: stretch;
+          gap: 1.75rem;
+          padding: 2.25rem;
           border-radius: 1.5rem;
           color: #111827;
           border: 1px solid rgba(0, 0, 0, 0.08);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
           transform-origin: center bottom;
           will-change: transform;
           container-type: inline-size;
           overflow: hidden;
-        }
-
-        @media (min-width: 768px) {
-          .sticky-cards-section-wrapper .gsap-card {
-            width: 85%;
-            height: 60%;
-            flex-direction: row;
-            padding: 2.5rem;
-          }
         }
 
         .sticky-cards-section-wrapper .gsap-card .col {
@@ -672,13 +720,12 @@ const ProductsSection = () => {
         }
 
         .sticky-cards-section-wrapper .gsap-card .col:nth-child(1) {
-          flex: 1.5;
+          flex: 1.4;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 0.5rem;
+          padding: 0.25rem;
           min-width: 0;
-          container-type: inline-size;
         }
         
         .sticky-cards-section-wrapper .gsap-card .col:nth-child(2) {
@@ -690,14 +737,14 @@ const ProductsSection = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 2rem;
+          padding: 1.5rem;
           min-width: 0;
         }
 
         .sticky-cards-section-wrapper .gsap-card h1 {
           text-transform: uppercase;
           font-family: "Barlow Condensed", sans-serif;
-          font-size: clamp(1.5rem, 10cqw, 3.5rem);
+          font-size: clamp(1.75rem, 5cqw, 3.25rem);
           font-weight: 800;
           line-height: 1;
           margin: 0;
@@ -708,14 +755,17 @@ const ProductsSection = () => {
         .sticky-cards-section-wrapper .gsap-card p {
           text-transform: uppercase;
           font-family: "DM Mono", monospace;
-          font-size: clamp(0.8rem, 2vw, 0.9rem);
+          font-size: 0.75rem;
           margin: 0;
           color: #64748b;
+          letter-spacing: 0.05em;
         }
 
         .sticky-cards-section-wrapper .gsap-card img {
-          width: 100%;
-          height: 100%;
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
           object-fit: contain;
           border-radius: 0.5rem;
         }
@@ -727,19 +777,63 @@ const ProductsSection = () => {
         #card-5 { background-color: var(--base-5); z-index: 3; }
         #card-6 { background-color: var(--base-6); z-index: 2; }
 
-        @media (max-width: 1000px) {
+        @media (max-width: 767px) {
           .sticky-cards-section-wrapper .gsap-card {
-            width: calc(100% - 3rem);
-            height: 75%;
+            width: calc(100% - 2.5rem);
+            max-width: 380px;
+            height: auto;
+            min-height: unset;
+            max-height: 68svh;
             flex-direction: column;
-            top: 55%;
-            padding: 1.5rem;
+            justify-content: flex-start;
+            align-items: stretch;
+            top: 50%;
+            padding: 1.25rem 1.25rem 1.25rem;
+            gap: 0.75rem;
+            border-radius: 1.25rem;
           }
           .sticky-cards-section-wrapper .gsap-card .col {
             width: 100%;
+            height: auto;
+          }
+          .sticky-cards-section-wrapper .gsap-card .col:nth-child(1) {
+            flex: initial;
+            padding: 0;
+            gap: 0.5rem;
+            justify-content: flex-start;
+          }
+          .sticky-cards-section-wrapper .gsap-card .col:nth-child(1) h1 {
+            font-size: 1.75rem !important;
+            margin-top: 0.1rem !important;
+            margin-bottom: 0.35rem !important;
+          }
+          .sticky-cards-section-wrapper .gsap-card .col:nth-child(1) p.card-desc {
+            font-size: 0.8rem !important;
+            line-height: 1.4 !important;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+          .sticky-cards-section-wrapper .gsap-card .col:nth-child(1) .btn-wrap {
+            margin-top: 0.25rem;
+          }
+          .sticky-cards-section-wrapper .gsap-card .col:nth-child(1) .btn-wrap a {
+            padding: 0.45rem 1.15rem !important;
+            font-size: 0.75rem !important;
           }
           .sticky-cards-section-wrapper .gsap-card .col:nth-child(2) {
-            padding: 1rem;
+            flex: initial;
+            width: 100%;
+            height: 100px;
+            max-height: 110px;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.75rem;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+          }
+          .sticky-cards-section-wrapper .gsap-card .col:nth-child(2) img {
+            max-height: 85px;
           }
         }
       `}</style>
@@ -757,13 +851,13 @@ const ProductsSection = () => {
             <div className="col">
               <div>
                 <p>{card.eyebrow}</p>
-                <h1 style={{ marginTop: '0.25rem', marginBottom: '1rem' }}>{card.title}</h1>
-                <p style={{ textTransform: 'none', fontFamily: 'inherit', fontWeight: '500', lineHeight: '1.5', color: '#334155' }}>{card.desc}</p>
+                <h1 style={{ marginTop: '0.25rem', marginBottom: '0.75rem' }}>{card.title}</h1>
+                <p className="card-desc" style={{ textTransform: 'none', fontFamily: 'inherit', fontWeight: '500', lineHeight: '1.5', color: '#334155' }}>{card.desc}</p>
               </div>
-              <div>
+              <div className="btn-wrap">
                 <a href="#appointment" style={{ 
                   display: 'inline-block',
-                  padding: '0.75rem 1.5rem',
+                  padding: '0.65rem 1.4rem',
                   backgroundColor: '#036c99',
                   color: '#ffffff',
                   borderRadius: '99px',
