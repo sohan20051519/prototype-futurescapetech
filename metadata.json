@@ -1,0 +1,8 @@
+{
+  "name": "futurescape main",
+  "description": "Corporate website and product showcase for Futurescape Technologies featuring interactive sticky cards and business solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
